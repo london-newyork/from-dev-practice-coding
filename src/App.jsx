@@ -25,16 +25,17 @@ export default function App () {
 
     return (
         <>
-            <form>
+            <form onSubmit={handleFormSubmit}>
                 <input
                 name="todo"
                 type="text"
                 placeholder="Create a new todo"
+                onChange={handleInputChange}
                 />
             </form>
             <ul className="todo-list">
                 {todos.map((todo) => (
-                    <li>{todo}</li>
+                    <li key={todo.id}>{todo.text}</li>
                 ))}
             </ul>
         </>
