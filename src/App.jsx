@@ -1,7 +1,19 @@
 import React, { useState, useEffect } from 'react'
 
 export default function App () {
-    const [ todos, setTodos ] = useState([])
+
+    const [ todos, setTodos ] = useState(() => {
+
+        const savedTodos = localStorage.getItem("todos")
+
+        if (savedTodos) {
+            return JSON.parse(savedTodos)
+        } else {
+            return []
+        }
+        
+        })
+
     const [ todo, setTodo ] = useState("")
 
     useEffect(() => {
