@@ -11,20 +11,13 @@ export default function App () {
         } else {
             return []
         }
-        
         })
 
     const [ todo, setTodo ] = useState("")
 
     useEffect(() => {
-        localStorage.setItem("todos", JSON.stringify(todos));
-        const savedTodos = localStorage.getItem("todos");
-        if (savedTodos){
-            return JSON.parse(savedTodos)
-        }else{
-            return []
-        }
-      }, [todos]);
+        localStorage.setItem("todos", JSON.stringify(todos))
+      }, [todos])
 
     function handleInputChange(e){
         setTodo(e.target.value)
@@ -45,6 +38,13 @@ export default function App () {
         setTodo("")
     }
 
+    function handleDeleteClick(id){
+        const removeItem = todos.filter((todo) => {
+            return todo.id !==id
+        })
+        setTodos(removeItem)
+    }
+
     return (
         <>
             <form onSubmit={handleFormSubmit}>
@@ -57,7 +57,9 @@ export default function App () {
             </form>
             <ul className="todo-list">
                 {todos.map((todo) => (
-                    <li key={todo.id}>{todo.text}</li>
+                    <li key={todo.id}>{todo.text}
+                        <button onClick={() => handleDeleteClick(todo.id)}>X</button>
+                    </li>
                 ))}
             </ul>
         </>
