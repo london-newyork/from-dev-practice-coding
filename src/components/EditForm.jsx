@@ -13,9 +13,9 @@ function EditForm({
                 <h2>Edit todo</h2>
                 <label htmlFor="editTodo">Edit todo: </label>
                 <input
-                    name="editTodo"
+                    name="updateTodo"
                     type="text"
-                    placeholder="Edit todo"
+                    placeholder="Update todo"
                     value={currentTodo.text}
                     onChange={onEditInputChange}
                 />

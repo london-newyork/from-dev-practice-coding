@@ -4,8 +4,7 @@ import AddTodoForm from './components/AddTodoForm';
 import EditForm from './components/EditForm';
 
 export default function App () {
-    const [isEditing, setIsEditing] = useState(false);
-    const [currentTodo, setCurrentTodo] = useState({});
+
     const [ todos, setTodos ] = useState(() => {
 
         const savedTodos = localStorage.getItem("todos")
@@ -18,6 +17,8 @@ export default function App () {
     })
 
     const [ todo, setTodo ] = useState("")
+    const [isEditing, setIsEditing] = useState(false);
+    const [currentTodo, setCurrentTodo] = useState({});
 
     useEffect(() => {
         localStorage.setItem("todos", JSON.stringify(todos))
@@ -25,7 +26,7 @@ export default function App () {
 
     function handleAddInputChange(e){
         setTodo(e.target.value)
-    }
+    }//
 
     function handleAddFormSubmit(e){
         e.preventDefault()
@@ -40,29 +41,29 @@ export default function App () {
             ])
         }
         setTodo("")
-    }
+    }//
 
     function handleDeleteClick(id){
         const removeItem = todos.filter((todo) => {
             return todo.id !==id
         })
         setTodos(removeItem)
-    }
+    }//
 
     function handleEditInputChange(e) {
         setCurrentTodo({ ...currentTodo, text: e.target.value });
         console.log(currentTodo);
-    }
+    }//
 
     function handleEditClick(todo){
             setIsEditing(true)
             setCurrentTodo({ ...todo })
-    }
+    }//
 
     function handleEditFormSubmit(e){
         e.preventDefault()
         handleUpdateTodo(currentTodo.id, currentTodo)
-    }
+    }//
 
     function handleUpdateTodo(id, updatedTodo){
         const updatedItem = todos.map((todo) => {
@@ -71,7 +72,7 @@ export default function App () {
 
         setIsEditing(false)
         setTodos(updatedItem)
-    }
+    }//
 
     return (
         <>
@@ -92,9 +93,9 @@ export default function App () {
             <ul className="todo-list">
                 {todos.map((todo) => (
                     <TodoItem
-                    todo={todo}
-                    onHandleEditClick={handleEditClick}
-                    onHandleDeleteClick={handleDeleteClick}
+                        todo={todo}
+                        onEditClick={handleEditClick}
+                        onDeleteClick={handleDeleteClick}
                     />
                 ))}
             </ul>
